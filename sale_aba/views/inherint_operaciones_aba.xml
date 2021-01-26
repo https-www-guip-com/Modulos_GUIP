@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+    <record model="ir.ui.view" id="crm_flujo_nuevo_operaciones_aba_operaciones_inherit_form_view">
+        <field name="name">crm_flujo_nuevo_operaciones.aba.form.view_seguimiento_plataforma</field>
+        <field name="model">crm_flujo_nuevo_operaciones</field>
+        <field name="inherit_id" ref="crm_funel_venta_guip.data_crm_form"/>
+        <field name="arch" type="xml">
+            
+
+            <header>
+
+                     <button name="enviar_compras_aba" string="Orden de compra" type="object" 
+                class="oe_highlight" />
+        
+            
+            </header>
+            
+            
+            <notebook>
+                    <page string="ABA">
+
+                        <group colspan="4">
+                              <field name="name_agente_atlantida" />
+                              <field name="codigo" />
+                              <field name="terminal" />
+                              <field name="tipo_terminal" />
+                        </group>
+
+                        <group colspan="4">
+                              <field name="name_contacto" />
+                              <field name="rtn" />
+                              <field name="usuario" />
+                              <field name="recibe_gestion" />
+                        </group>
+
+                        <group colspan="4">
+                              <field name="tipo_chip_selec" />
+                              <field name="token" />
+                        </group>
+
+                        <group colspan="8">
+                            <field name="comentarios" />
+                        </group>
+
+                    </page>   
+
+                    
+                 </notebook>
+        
+        </field>
+    </record>
+
+    </data>
+</odoo>

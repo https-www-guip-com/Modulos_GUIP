@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+menu_hr_attendance_root200,access.creacion_usuarios_aba,model_creacion_usuarios_aba,sales_team.group_sale_manager,1,1,1,1
+menu_hr_attendance_root201,access.creacion_usuarios_aba,model_creacion_usuarios_aba,sales_team.group_sale_salesman,1,1,1,1
+
+
