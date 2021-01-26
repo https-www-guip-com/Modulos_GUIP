@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+menu_hr_attendance_root,access.test_model_name,model_test_model_name,asinhvien_giangvien_group,1,1,1,1
+menu_hr_attendance_root1,access.test_model_name,model_test_model_name,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root2,access.test_model_precio,model_test_model_precio,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root3,access.test_model_deducciones,model_test_model_deducciones,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root4,access.test_model_tipo_deducciones,model_test_model_tipo_deducciones,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root52,access.test_model_ingresos,model_test_model_ingresos,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root53,access.model_tipo_dedu_ingre_anuales,model_model_tipo_dedu_ingre_anuales,rrhh_giangvien_group,1,1,1,1
+menu_hr_attendance_root54,access.model_configuraciones_nomina,model_model_configuraciones_nomina,rrhh_giangvien_group,1,1,1,1
+
+
+
