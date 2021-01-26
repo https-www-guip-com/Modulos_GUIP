@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="solicitar_info_usuarios_creacion_tree_view" model="ir.ui.view">
+            <field name="name">creacion_usuarios_guip.tree.view</field>
+            <field name="model">creacion_usuarios_guip</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="user" />
+                    <field name="assigned_date" />
+                    <field name="genero" />
+                    <field name="tipo_usuario" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="solicitar_info_user_creacion_form_view" model="ir.ui.view">
+            <field name="name">creacion_usuarios_guip.form.view</field>
+            <field name="model">creacion_usuarios_guip</field>
+            <field name="arch" type="xml">
+                <form string="Info usuarios">
+                    <group colspan="4" col="4">
+                        <field name="name" />
+                        <field name="user" />
+                        <field name="assigned_date" />
+                        <field name="genero" />
+                        <field name="tipo_usuario" />
+                    </group>
+                    <group>
+                        <field name="correo" />
+                        <field name="celular" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

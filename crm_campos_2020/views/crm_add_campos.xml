@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="crm_add_form_inherit" model="ir.ui.view">
+            <field name="name">crm_add.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="before">
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "numero_id" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "3" data-inputmask-greedy = "false" name = "edad" />
+                </field>
+
+                <field name="website" position="before">
+                    <field name = "longitud" />
+                    <field name = "latitud" />
+                    
+                    <field name = "deno_razon_social" />
+                    <field name = "email_negocio" />
+                    <field name = "telefono_negocio" />
+                     <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "antiguedad" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "cantidad_productos" />
+                    <field name = "valor_mensual" />
+
+                    <field name = "tiene_internet" />
+                    <field name = "tipo_internet" />
+                    <field name = "tipo_chip_selec" />
+                    <field name = "empleados_negocio" />
+                    <field name = "metodos_pago" />
+                    
+
+                </field>
+                
+                <field name="team_id" position="after">
+                   
+                        <field name = "nombre_completo_dueno" />
+                        <field name = "numero_id_dueno" />
+                        <field name = "email_dueno" />
+                   
+                </field>
+
+                <notebook>
+                    <page string="Usuarios">
+                        <group colspan="4">
+                                <field name="user_creacion_ids"
+                                        nolabel="1">
+                                        <tree>
+                                                <field name="name" />
+                                                <field name="user" />
+                                                <field name="tipo_usuario" />
+                                        </tree>
+                                </field>  
+                        </group>
+                    </page>   
+
+                </notebook>
+
+                
+
+            </field>
+        </record>
+
+
+        <record id="crm_flujo_form_inherit" model="ir.ui.view">
+            <field name="name">flujo.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <field name="website" position="after">
+                    <field name = "longitud" />
+                    <field name = "latitud" />
+
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "numero_id" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "3" data-inputmask-greedy = "false" name = "edad" />
+                
+                    <field name = "deno_razon_social" />
+                    <field name = "email_negocio" />
+                    <field name = "telefono_negocio" />
+                     <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "antiguedad" />
+                    <field widget = "mask" data-inputmask-mask = "9" data-inputmask-repeat = "20" data-inputmask-greedy = "false" name = "cantidad_productos" />
+                    <field name = "valor_mensual" />
+
+                    <field name = "tiene_internet" />
+                    <field name = "tipo_internet" />
+                    <field name = "tipo_chip_selec" />
+                    <field name = "empleados_negocio" />
+                    <field name = "metodos_pago" />
+                    
+
+                </field>
+
+                <field name="mobile" position="after">
+
+                    <field name = "nombre_completo_dueno" />
+                    <field name = "numero_id_dueno" />
+                    <field name = "email_dueno" />
+                </field>    
+
+
+                 <notebook>
+                    <page string="Usuarios">
+                        <group colspan="4">
+                                
+                                <field name="user_creacion_ids"
+                                        nolabel="1">
+                                        <tree>
+                                                <field name="name" />
+                                                <field name="user" />
+                                                <field name="tipo_usuario" />
+                                        </tree>
+                                </field>  
+                        </group>
+                    </page>   
+
+                    
+                 </notebook>
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
