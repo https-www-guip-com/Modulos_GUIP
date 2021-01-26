@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <data>
+
+        <record model="ir.ui.view" id="crm_operaciones_sitemas_inherit_form_view">
+        <field name="name">crm_flujo_nuevo_operaciones_operaciones</field>
+        <field name="model">crm_flujo_nuevo_operaciones</field>
+        <field name="inherit_id" ref="crm_funel_venta_guip.data_crm_form"/>
+        <field name="arch" type="xml">    
+           
+            <field name="user_id" position="after">
+                    <field name="operaciones_sistemas_id" />
+            </field>
+           
+        </field>
+    </record>
+     </data>
+</odoo>
+   
+        
