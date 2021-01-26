@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <record model="ir.module.category" id="module_category_flujo_operaciones">
+	            <field name="name">Flujo Operaciones</field>
+	            <field name="description">Operaciones</field>
+	            <field name="sequence">8</field>
+			</record>
+
+			<record id="supervisor_flujo_operaciones_group" model="res.groups"> 
+	            <field name="name">Usuario Operaciones</field>
+	            <field name="category_id" ref="module_category_flujo_operaciones"/>
+       		 </record>
+			
+
+			<record id="supervisor_nivel2_flujo_operaciones_group" model="res.groups"> 
+	            <field name="name">Supervisor Operaciones</field>
+	            <field name="category_id" ref="module_category_flujo_operaciones"/>
+       		 </record>
+
+       		<record id="gerente_flujo_operaciones_group" model="res.groups"> 
+	            <field name="name">Gerente OPeraciones</field>
+	            <field name="category_id" ref="module_category_flujo_operaciones"/>
+       		 </record>
+			<!--
+			<record id="supervisor_flujo_sistemas_group" model="res.groups"> 
+	            <field name="name">Supervisor Sistemas</field>
+	            <field name="category_id" ref="module_category_flujo_operaciones"/>
+       		 </record>
+
+       		<record id="gerente_flujo_sistemas_group" model="res.groups"> 
+	            <field name="name">Gerente Sistemas</field>
+	            <field name="category_id" ref="module_category_flujo_operaciones"/>
+       		 </record>
+			-->
+			
+
+    </data>
+</odoo>
