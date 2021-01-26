@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Multi Payslip Wizard -->
+        <record id="multi_payslip_confirm_form_wizard" model="ir.ui.view">
+            <field name="name">multi.payslip.wizard.form.wizard</field>
+            <field name="model">multi.payslip.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <h3>Haga clic en el botón Confirmar para confirmar varios recibos de pago.</h3>
+                    <footer>
+                        <button name="multi_payslip" string="Confirmar" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancelar" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_multiple_payslip_hr_payslip"
+            multi="True"
+            key2="client_action_multi" name="Confirmación de recibo de pago múltiples"
+            res_model="multi.payslip.wizard" src_model="hr.payslip"
+            view_mode="form" target="new" view_type="form" />
+        
+    </data>
+</odoo>
