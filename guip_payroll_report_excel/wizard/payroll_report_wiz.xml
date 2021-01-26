@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--NOMINA-->
+    
+    <record model="ir.ui.view" id="hr_payslip_run_inherit_form">
+            <field name="name">hr.payslip.run.form.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                   
+                    <button name="get_nomi_data" type="object" string="Nomina Excel"/>
+                    <!--
+                     <button name="duracion_fechas" type="object" string="MODIFICAR"/>
+                    -->
+                </field>
+
+                    <field name="credit_note" position="after">
+                      <field name="aguinaldo" />
+                      <field name="catorceavo" />
+                    </field>
+            </field>
+    </record>
+
+    
+
+    <!--BANCO-->
+    <record model="ir.ui.view" id="hr_payslip_run_inherit_form_BANCO">
+            <field name="name">hr.payslip.run.form.inherit_banco</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                   
+                    <button name="get_nomi_data_banco" type="object" string="Formato Banco"/>
+                    
+                </field>
+            </field>
+    </record>
+
+
+    <!--GUIP-->
+    <record model="ir.ui.view" id="hr_payslip_run_inherit_form_guip">
+            <field name="name">hr.payslip.run.form.inherit_guip</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <field name="state" position="before">
+                   
+                    <button name="get_nomi_data_guip" type="object" string="Formato GUIP"/>
+                    
+                </field>
+            </field>
+    </record>
+
+
+    <!--CAMPO DEL IHSS EN CONTRATO-->
+    <record model="ir.ui.view" id="hr_payslip_run_inherit_form_ihss">
+            <field name="name">hr.payslip.run.form.inherit_ihss</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <field name="hora_contractual" position="after">
+                 
+                            <field name="meses_seguro" />
+                        
+                            <field name="cole_monto" /> 
+                            <field name="meses_cole" /> 
+                     
+                            <field name="pensiones_monto" /> 
+                            <field name="pensiones_cole" /> 
+
+                </field>
+            </field>
+    </record>
+
+
+    <record id="hr_salary_rule_form_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="add_rule_ids" widget="many2many_tags"/>
+                    <field name="sub_rule_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+    </record>
+
+    <!--
+    <record model="ir.ui.view" id="view_payroll_report_view_form">
+        <field name="name">payroll.report.wiz.form</field>
+        <field name="model">payroll.report.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Payroll Report">
+                <group colspan="4" col="4">
+                     <field name="from_date"/>
+                    <field name="date_end"/>
+                    <field name="company" invisible="1"/>
+                </group>
+              <footer>
+                    <button name="get_item_data" type="object" string="Print" class="oe_highlight"/>
+                    Or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    -->
+    <record model="ir.ui.view" id="view_payroll_excel">
+        <field name="name">view.payrol.report.excel</field>
+        <field name="model">payroll.report.excel</field>
+        <field name="arch" type="xml">
+            <form string="Descargue su nómina">
+                <field name="name" invisible="1"/>
+                <field name="file_download" filename="name"/>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_payroll_excel_banco">
+        <field name="name">view.payrol.report.excel.banco</field>
+        <field name="model">payroll.report.excel.banco</field>
+        <field name="arch" type="xml">
+            <form string="Descargue su archivo de banco">
+                <field name="name" invisible="1"/>
+                <field name="file_download" filename="name"/>
+            </form>
+        </field>
+    </record>
+
+    <!--
+    <record id="action_payroll_reporting_excel" model="ir.actions.act_window">
+        <field name="name">Payroll Report</field>
+        <field name="res_model">payroll.report.wiz</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+-->
+    <!--
+    <menuitem id="menu_payroll_excel_report" name="Payroll Excel Report" action="action_payroll_reporting_excel"
+              parent="hr_payroll.menu_hr_payroll_root"/>
+    -->
+</odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+
+    <record model='ir.ui.view' id='employee_document_form_view_acumulado'>
+        <field name="name">hr.employee.document.form.acumulado</field>
+        <field name="model">hr.employee.impuesto</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="fecha"/>
+                            <field name="monto_lps"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record model='ir.ui.view' id='employee_document_tree_view'>
+        <field name="name">hr.employee.document.tree</field>
+        <field name="model">hr.employee.impuesto</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="fecha"/>
+                <field name="monto_lps"/>
+            </tree>
+        </field>
+    </record>
+
+   
+
+    <record model="ir.ui.view" id="hr_employee_document_inherit_form_view">
+        <field name="name">hr.employee.form.view_acumulado</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+           
+            <div class="oe_button_box" position="inside">
+                
+                <button class="oe_stat_button" name="document_view" type="object" icon="fa-list-ol">
+                    <field string="ISR" name="document_count" widget="statinfo"/>
+                </button>
+
+            </div>
+        
+        </field>
+    </record>
+
+    <!--SUELDOS ACUMULADOS-->
+
+    <record model='ir.ui.view' id='employee_document_sueldo_form_view_acumulado'>
+        <field name="name">hr.employee.document.form.acumulado_sueldo</field>
+        <field name="model">hr.employee.sueldos</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="fecha_sueldo"/>
+                            <field name="monto_sueldo"/>
+                            <field name="aguinaldo_sueldo"/>
+                            <field name="year_sueldo"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+      <record model='ir.ui.view' id='employee_document_sueldo_tree_view'>
+        <field name="name">hr.employee.document.sueldo.tree</field>
+        <field name="model">hr.employee.sueldos</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="fecha_sueldo"/>
+                <field name="monto_sueldo"/>
+                <field name="aguinaldo_sueldo"/>
+                <field name="year_sueldo"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="hr_employee_document_sueldos_inherit_form_view">
+        <field name="name">hr.employee.form.view_acumulado_sueldos_</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+           
+            <div class="oe_button_box" position="inside">
+                
+                <button class="oe_stat_button" name="document_view_sueldo" type="object" icon="fa-usd">
+                    <field string="Sueldos" name="document_count_sueldo" widget="statinfo"/>
+                </button>
+
+            </div>
+        
+        </field>
+    </record>
+
+   
+
+   
+
+</odoo>
