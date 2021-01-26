@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_partnerledger">
+        <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="12"/>
+            <t t-set="data_report_header_spacing" t-value="9"/>
+            <t t-set="data_report_dpi" t-value="110"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        
+
+                        <div class="row">
+                            <div class="col-3">
+                                <h2>Libro mayor de socios</h2>
+                            </div>
+                            <div class="col-3">
+                                <t t-if="data['form']['date_from']"><strong>Fecha de inicio:</strong> <span t-esc="data['form']['date_from']"/><br/></t>
+                                <t t-if="data['form']['date_to']"><strong>Fecha fin :</strong> <span t-esc="data['form']['date_to']"/></t>
+                            </div>
+                            <div class="col-3">
+                                <strong>Target Moves:</strong>
+                                <p t-if="data['form']['target_move'] == 'all'">Todas las entradas</p>
+                                <p t-if="data['form']['target_move'] == 'posted'">Todas las entradas publicadas</p>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-reports">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>JRNL</th>
+                                    <th>Cuenta</th>
+                                    <th>Ref</th>
+                                    <th>Debito</th>
+                                    <th>Credito</th>
+                                    <th>Saldo</th>
+                                    <th t-if="data['form']['amount_currency']">Moneda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 3px;" colspan="4">
+                                            <strong t-esc="o.ref"/>
+                                            - <strong t-esc="o.name"/>
+                                    </td>
+                                    <td style="padding: 3px;" class="text-right">
+                                        <strong t-esc="sum_partner(data, o, 'debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td style="padding: 3px;" class="text-right">
+                                        <strong t-esc="sum_partner(data, o, 'credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td style="padding: 3px;" class="text-right">
+                                        <strong t-esc="sum_partner(data, o, 'debit - credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                </tr>
+                                <tr t-foreach="lines(data, o)" t-as="line">
+                                    <td style="padding: 3px;">
+                                        <span t-esc="line['date']"/>
+                                    </td>
+                                    <td style="padding: 3px;">
+                                        <span t-esc="line['code']"/>
+                                    </td>
+                                    <td style="padding: 3px;">
+                                        <span t-esc="line['a_code']"/>
+                                    </td>
+                                    <td style="padding: 3px;">
+                                        <span t-esc="line['displayed_name']"/>
+                                    </td>
+                                    <td style="padding: 3px;" class="text-right">
+                                        <span t-esc="line['debit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" style="padding: 3px;">
+                                        <span t-esc="line['credit']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" style="padding: 3px;">
+                                        <span t-esc="line['progress']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" t-if="data['form']['amount_currency']" style="padding: 3px;">
+                                        <t t-if="line['currency_id']">
+                                          <span t-esc="line['amount_currency']" t-options="{'widget': 'monetary', 'display_currency': line['currency_id']}"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
