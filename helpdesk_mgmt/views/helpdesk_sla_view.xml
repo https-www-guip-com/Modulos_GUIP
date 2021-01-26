@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_support_sla_view_form" model="ir.ui.view">
+        <field name="name">website.support.sla form view</field>
+        <field name="model">website.support.sla</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    
+                    <group>
+                        <field name="category_id"/>
+                        <field name="sla_cat"/>
+                        <field name="sla_tiempo"/>
+
+                        
+                    </group>
+                    
+                    <group>
+                        <field name="correo_template_id"/>
+                    </group>
+
+                    <group>
+                        <notebook>
+                            <page string="Descripcion" name="description">
+                                <field name="description" widget="html"/>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <!--
+                       
+                    <field name="rule_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="response_time" widget="float_time"/>
+                            <field name="countdown_condition"/>
+                        </tree>
+                    </field>
+                    
+                    <field name="alert_ids">
+                        <tree editable="bottom">
+                            <field name="alert_time" widget="float_time"/>
+                            <field name="type"/>
+                        </tree>
+                    </field>
+                    -->
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="website_support_sla_view_tree" model="ir.ui.view">
+        <field name="name">website.support.sla tree view</field>
+        <field name="model">website.support.sla</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sla_tiempo"/>
+            </tree>
+        </field>
+    </record>
+    
+
+</odoo>
