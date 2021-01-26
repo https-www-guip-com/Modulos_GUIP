@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="solicitar_info_tareas_tree_view" model="ir.ui.view">
+            <field name="name">solicitar.info.tareas.tree.view</field>
+            <field name="model">model_solicitar_tareas</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre_tarea" />
+                    <field name="descripcion_tarea" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="solicitar_info_tareas_form_view" model="ir.ui.view">
+            <field name="name">solicitar.info.tareas.form.view</field>
+            <field name="model">model_solicitar_tareas</field>
+            <field name="arch" type="xml">
+                <form string="Info Tareas">
+                    <group colspan="4" col="4">
+                        <field name="nombre_tarea" />
+                        <field name="descripcion_tarea" />
+                        <field name="tarea_seleccionar_id" invisible="1"/>
+                         <field name="codigo_tarea" readonly="1" invisible="1" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

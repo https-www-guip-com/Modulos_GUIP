@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <record model="ir.ui.view" id="project_solicitud_aprobadas_inherit_form_view">
+        <field name="name">project_form_view_campos_nuevos</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+
+                <header>
+                
+                    <button name="finalizar_proyecto" 
+                         type="object" 
+                         string="Finalizar Proyecto"
+                         class="oe_highlight"
+                         groups="project.group_project_manager"
+                         />
+
+                </header>
+    
+                <notebook position='inside'>
+                        <page string="Detalles Del Proyecto">
+                            <group>
+                                <field name="objetivo" />
+                                <field name="descrpcion_breve"/>
+                            </group>
+                        
+                            <group>
+                                <field name="fecha_inicio"/>
+                                <field name="fecha_fin"/>
+                                <field name="proyecto_seleccionar_id" readonly = "1"/>
+                            </group>
+
+                            <notebook>
+                                    <page string="Descripcion Completa">
+                                        <group colspan="4">
+                                            <field name="descrpcion_completa"/>
+                                        </group> 
+                                    </page>
+                            </notebook>
+
+                        </page>
+                </notebook>
+
+        </field>
+    </record>
+    
+    
+    </data>
+</odoo>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Aprobacion De Proyecto-->
+        <record id="mail_template_solicitar" model="mail.template">
+                <field name="name">Aprobacion de proyecto</field>
+                <field name="model_id" ref="solicitar_proyectos.model_model_solicitar_proyectos"/>
+                <field name="subject">${object.nombre_proyec}</field>
+                <field name="email_from">${object.company_id.partner_id.email}</field>
+                <field name="email_to">${object.employee_id.email}</field>
+                <field name="auto_delete" eval="True"/>
+                <field name="lang">${object.env.user.lang}}</field>
+                <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; padding-bottom:16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle">
+                                                <span style="font-size: 10px;">Proyecto</span><br/>
+                                                <span style="font-size: 15px; font-weight: bold;">
+                                                    ${object.nombre_proyec}
+                                                </span>
+                                            </td><td valign="middle" align="right">
+                                                
+                                                <!--
+                                                <img src="/logo.png?company=${object.company_id.id}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="${object.company_id.name}"/>
+
+                                                      <img src="data:image/png;base64,${object.company_id.logo}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;"  />
+                                                -->
+
+                                                <img src='/web/binary/company_logo' class="float-center" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="Logo"/>
+                                               
+                                            
+                                            </td></tr>
+                                            <tr><td colspan="2" style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div>
+                                                    <p>Buen día ${object.employee_id.name or ''},</p>
+                                                    <p>Nos complace informarle que su solicitud de proyecto con nombre <strong> ${object.nombre_proyec} </strong> ha sido aprobada. Por tanto a partir de la fecha su proyecto empieza en vigencia</p>
+                                                    <br/><br/>
+                                                    <p>Gracias por su atención.</p>
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                ${object.company_id.name}
+                                            </td></tr>
+                                            <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                                ${object.company_id.phone}
+                                                % if object.company_id.email
+                                                    | <a href="'mailto:%s' % ${object.company_id.email}" style="text-decoration:none; color: #454748;">${object.company_id.email}</a>
+                                                % endif
+                                                % if object.company_id.website
+                                                    | <a href="'%s' % ${object.company_id.website}" style="text-decoration:none; color: #454748;">
+                                                    ${object.company_id.website}
+                                                </a>
+                                                % endif
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td></tr>
+                </table>
+            </field>
+        </record>
+
+        <!--Seguidores De Proyecto-->
+        <record id="mail_template_solicitar_asignado" model="mail.template">
+                <field name="name">Seguidores de proyecto</field>
+                <field name="model_id" ref="solicitar_proyectos.model_model_solicitar_proyectos"/>
+                <field name="subject">${object.nombre_proyec}</field>
+                <field name="email_from">${object.company_id.partner_id.email}</field>
+                <field name="email_to">${object.correos_seguidores_mail()}</field>
+                <field name="auto_delete" eval="True"/>
+                <field name="lang">${object.env.user.lang}}</field>
+                <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; padding-bottom:16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle">
+                                                <span style="font-size: 10px;">Proyecto</span><br/>
+                                                <span style="font-size: 15px; font-weight: bold;">
+                                                    ${object.nombre_proyec}
+                                                </span>
+                                            </td><td valign="middle" align="right">
+                                                
+                                                <!--
+                                                <img src="/logo.png?company=${object.company_id.id}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="${object.company_id.name}"/>
+
+                                                      <img src="data:image/png;base64,${object.company_id.logo}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;"  />
+                                                -->
+
+                                                <img src='/web/binary/company_logo' class="float-center" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="Logo"/>
+                                               
+                                            
+                                            </td></tr>
+                                            <tr><td colspan="2" style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div>
+                                                    <p>Buen día estimados</p>
+                                                    <p>Nos complace informarle que se le ha agregado como seguidor en el <strong> ${object.nombre_proyec} </strong>. Por tanto a partir de la fecha empieza en vigencia como seguidor.</p>
+                                                    <br/>
+                                                    <p><strong>Encargado del proyecto:</strong> ${object.employee_id.name or ''} </p>
+                                                    <br/>
+                                                    <p>Gracias por su atención.</p>
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                ${object.company_id.name}
+                                            </td></tr>
+                                            <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                                ${object.company_id.phone}
+                                                % if object.company_id.email
+                                                    | <a href="'mailto:%s' % ${object.company_id.email}" style="text-decoration:none; color: #454748;">${object.company_id.email}</a>
+                                                % endif
+                                                % if object.company_id.website
+                                                    | <a href="'%s' % ${object.company_id.website}" style="text-decoration:none; color: #454748;">
+                                                    ${object.company_id.website}
+                                                </a>
+                                                % endif
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td></tr>
+                </table>
+            </field>
+        </record>
+
+        <!--Actualizacion de tareas-->
+        <record id="mail_template_nuevas_tareas" model="mail.template">
+                <field name="name">Se han agregado nuevas tareas</field>
+                <field name="model_id" ref="solicitar_proyectos.model_model_solicitar_proyectos"/>
+                <field name="subject">${object.nombre_proyec}</field>
+                <field name="email_from">${object.company_id.partner_id.email}</field>
+                <field name="email_to">${object.proyecto_id.user_id.login}</field>
+                <field name="auto_delete" eval="True"/>
+                <field name="lang">${object.env.user.lang}}</field>
+                <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; padding-bottom:16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <!-- HEADER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle">
+                                                <span style="font-size: 10px;">Proyecto</span><br/>
+                                                <span style="font-size: 15px; font-weight: bold;">
+                                                    ${object.nombre_proyec}
+                                                </span>
+                                            </td><td valign="middle" align="right">
+                                                
+                                                <!--
+                                                <img src="/logo.png?company=${object.company_id.id}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="${object.company_id.name}"/>
+
+                                                      <img src="data:image/png;base64,${object.company_id.logo}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;"  />
+
+                                                     <img src='/web/binary/company_logo' class="float-center" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="Logo"/>
+                                               
+                                                -->
+
+                                            </td></tr>
+                                            <tr><td colspan="2" style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- CONTENT -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div> 
+                                                    <p>Buen día ${object.proyecto_id.user_id.name or ''},</p>
+                                                    <p>Se han agregado nuevas tareas al proyecto con nombre <strong> ${object.nombre_proyec} </strong>. </p>
+                                                    <br/><br/>
+                                                    <p>Gracias por su atención.</p>
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <!-- FOOTER -->
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                ${object.company_id.name}
+                                            </td></tr>
+                                            <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                                ${object.company_id.phone}
+                                                % if object.company_id.email
+                                                    | <a href="'mailto:%s' % ${object.company_id.email}" style="text-decoration:none; color: #454748;">${object.company_id.email}</a>
+                                                % endif
+                                                % if object.company_id.website
+                                                    | <a href="'%s' % ${object.company_id.website}" style="text-decoration:none; color: #454748;">
+                                                    ${object.company_id.website}
+                                                </a>
+                                                % endif
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td></tr>
+                </table>
+            </field>
+        </record>
+
+        <!--Finalizacion de proyecto-->
+        
+        <record id="mail_template_finalizacion_proyecto" model="mail.template">
+                <field name="name">Finalizacion de proyecto</field>
+                <field name="model_id" ref="project.model_project_project"/>
+                <field name="subject">${object.name}</field>
+                <field name="email_from">${object.company_id.partner_id.email}</field>
+                <field name="email_to">${object.proyecto_seleccionar_id.employee_id.login}</field>
+                <field name="email_cc">${object.user_id.login}</field>
+                <field name="auto_delete" eval="True"/>
+                <field name="lang">${object.env.user.lang}}</field>
+                <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; padding-bottom:16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle">
+                                                <span style="font-size: 10px;">Proyecto</span><br/>
+                                                <span style="font-size: 15px; font-weight: bold;">
+                                                    ${object.name}
+                                                </span>
+                                            </td><td valign="middle" align="right">
+                                                
+                                                
+                                                <img src="/logo.png?company=${object.company_id.id}" 
+                                                     style="padding: 0px; margin: 0px; height: auto; width: 80px;" 
+                                                     alt="${object.company_id.name}"/>
+
+                                            </td></tr>
+                                            <tr><td colspan="2" style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div> 
+                                                    <p>Buen día ${object.proyecto_seleccionar_id.employee_id.name or ''},</p>
+                                                    <p>El proyecto con nombre <strong> ${object.name} </strong>. Se ha finalizado correctamente. </p>
+                                                    <br/><br/>
+                                                    <br/>
+                                                    <p><strong>Creador del proyecto:</strong> ${object.proyecto_seleccionar_id.employee_id.name or ''} </p>
+                                                    <p><strong>Encargado del proyecto:</strong> ${object.user_id.name or ''} </p>
+                                                    <br/>
+                                                    <p>Gracias por su atención.</p>
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                            <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                ${object.company_id.name}
+                                            </td></tr>
+                                            <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                                ${object.company_id.phone}
+                                                % if object.company_id.email
+                                                    | <a href="'mailto:%s' % ${object.company_id.email}" style="text-decoration:none; color: #454748;">${object.company_id.email}</a>
+                                                % endif
+                                                % if object.company_id.website
+                                                    | <a href="'%s' % ${object.company_id.website}" style="text-decoration:none; color: #454748;">
+                                                    ${object.company_id.website}
+                                                </a>
+                                                % endif
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td></tr>
+                </table>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
+
+  

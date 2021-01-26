@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+<!--Vista de etiquetas-->
+
+    <record id="proyectos_lead_tag_form" model="ir.ui.view">
+            <field name="name">proyecto_lead_tag.tag.form</field>
+            <field name="model">proyecto_lead_tag</field>
+            <field name="arch" type="xml">
+                <form string="Etiquetas de proyectos">
+                    <group>
+                        <field name="name"/>
+                        <field name="color" groups="base.group_no_one"/>
+                    </group>
+                </form>
+            </field>
+    </record>
+
+    <record id="proyectos_lead_tag_tree" model="ir.ui.view">
+            <field name="name">proyecto_lead_tag.tag.tree</field>
+            <field name="model">proyecto_lead_tag</field>
+            <field name="arch" type="xml">
+                <tree string="Etiquetas de proyectos">
+                    <field name="name"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="proyectos_lead_tag_action" model="ir.actions.act_window">
+            <field name="name">Etiquetas</field>
+            <field name="res_model">proyecto_lead_tag</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="proyectos_lead_tag_tree"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Cree una nueva etiqueta para sus proyectos
+              </p><p>
+                Cree etiquetas que se adapten a su negocio (estructura de producto, tipo de ventas, etc.) para administrar y abordar mejor sus oportunidades.
+              </p>
+            </field>
+    </record>
+
+    <record id="data_solic_proyecto_tree" model="ir.ui.view">
+        <field name="name">solicitar_proyectos.ticket.tree</field>
+        <field name="model">model_solicitar_proyectos</field>
+        <field name="arch" type="xml"   >
+            <tree string="Solicitar Proyectos" >
+                <field name="employee_id" />
+                <field name="nombre_proyec"/>
+                <field name="objetivo"/>     
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+                <field name="fase_proyecto"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--VIsta de busqueda-->
+    <record id="view_solicitar_proyectos_filter" model="ir.ui.view">
+            <field name="name">solicitar_proyectos_list_select</field>
+            <field name="model">model_solicitar_proyectos</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    
+                    <field name="employee_id" string="Empleado"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Empleado" name="employee_id" domain="[]" context="{'group_by':'employee_id'}"/>
+                    </group>
+
+                </search>
+            </field>
+    </record>
+
+    <!--PRIMERO-->
+    <record id="data_test_form" model="ir.ui.view">
+        <field name="name">helpdesk_lite_precio.ticket.form</field>
+        <field name="model">model_solicitar_proyectos</field>
+        <field name="arch" type="xml">
+            <form string="Solicitar Proyectos">
+            	<header>
+                <!--
+                <button name="send_user_mail" 
+                         type="object" 
+                         string="Correo Prueba"
+                         class="oe_highlight"
+                         groups="solicitar_proyectos.gerente_solicita_group"
+                         />
+                -->
+
+                <button name="validacion_aprobacion" 
+                         type="object" 
+                         string="Enviar Aprobacion"
+                         class="oe_highlight"
+                         groups="solicitar_proyectos.supervisor_solicita_group"
+                         />
+
+                <button name="validacion_aprobacion_gerencia" 
+                         type="object" 
+                         string="Aprobado"
+                         class="oe_highlight"
+                         groups="solicitar_proyectos.gerente_solicita_group"
+                         />
+                
+                <button name="cancelar_aprobacion_gerencia" 
+                         type="object" 
+                         string="Rechazado"
+                         class="oe_highlight"
+                         groups="solicitar_proyectos.gerente_solicita_group"
+                         />
+                
+                <button name="borrador_aprobacion_gerencia" 
+                         type="object" 
+                         string="Cambiar a borrador"
+                         class="oe_highlight"
+                         groups="solicitar_proyectos.supervisor_solicita_group"
+                         />
+
+                <field name="fase_proyecto" 
+                       widget="statusbar"
+                       options="{'fold_field': '1'}"
+                       />
+
+                </header>
+            	<sheet>
+                    <!--
+            		<div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button  class="oe_stat_button" name="proyecto_id" type="object" icon="fa-files-o">
+                            
+                        </button>
+                    </div>
+                    -->
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="nombre_proyec"/>
+                            <field name="objetivo"/>      
+                            <field name="descrpcion_breve"/>
+                        </group>
+                        
+                        <group>
+                            <field name="fecha_inicio"/>
+                            <field name="fecha_fin" attrs="{'invisible': ['|', ('fase_proyecto', '!=', '5')]}" />
+                            <field name="proyecto_id" readonly = "1" />
+                        </group>
+                        
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="seguidores_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        </group>
+                        
+                     
+                    </group>
+
+                     <notebook>
+                            <page string="Descripcion">
+                                <group colspan="4">
+                                    <field name="descrpcion_completa"/>
+                                </group> 
+                            </page>
+                            
+                            <page string="Tareas">
+                                <group colspan="4">
+                                    
+                                    <button name="actualizar_tareas" 
+                                    type="object" 
+                                    string="Actualizar Tareas"
+                                    class="oe_highlight"
+                                    groups="solicitar_proyectos.supervisor_solicita_group,solicitar_proyectos.gerente_solicita_group"
+                                    />
+
+                                    <field name="proyecto_tareas_ids"
+                                        nolabel="1">
+                                        <tree>
+                                                <field name="nombre_tarea" />
+                                                <field name="descripcion_tarea" />
+                                        </tree>
+                                    </field>
+                                </group> 
+                            </page>
+                           
+                     </notebook>
+                     
+            	</sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            
+            </form>
+        </field>
+    </record>
+
+    
+    <record id="solicita_123" model="ir.actions.act_window">
+    	<field name="name">Ingreso De Proyectos</field>
+    	<field name="res_model">model_solicitar_proyectos</field>
+    	<field name="view_type">form</field>
+    	<field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <!--REGLAS DE REGISTROS-->
+    <record id="today_solicita_proyecto" model="ir.rule">
+            <field name="name">Id regla solicitar proyecto</field>
+            <field name="model_id" ref="model_model_solicitar_proyectos"/>
+            <field name="groups" eval="[(6,0, [ref('solicitar_proyectos.gerente_solicita_group')])]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+
+
+    <record id="today_solicita_supervisor" model="ir.rule">
+            <field name="name">Id regla solicitar supervisor</field>
+            <field name="model_id" ref="model_model_solicitar_proyectos"/>
+            <field name="groups" eval="[(6,0, [ref('solicitar_proyectos.supervisor_solicita_group')])]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1" />
+            <field name="domain_force">['|',('employee_id','=',user.id),('employee_id','=',False)]</field>
+    </record>
+
+    <record id="seguidor_solicita_supervisor" model="ir.rule">
+            <field name="name">Id regla seguidor solicitar supervisor</field>
+            <field name="model_id" ref="model_model_solicitar_proyectos"/>
+            <field name="groups" eval="[(6,0, [ref('solicitar_proyectos.supervisor_solicita_group')])]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0" />
+            <field name="domain_force">['|',('seguidores_ids.user_id','=',user.id),('seguidores_ids.user_id','=',False)]</field>
+    </record>
+
+     
+    		    <menuitem
+	            id="menu_solcita_proyecto_root"
+	            name="Solicitar Proyectos"
+	            groups="solicitar_proyectos.supervisor_solicita_group,solicitar_proyectos.gerente_solicita_group"
+                web_icon="solicitar_proyectos,static/description/icon.png"
+	            />
+                
+                <!--
+                <menuitem
+	            id="menu_solcita_proyecto_gerente"
+	            name="Solicitar Proyectos"
+	            groups="solicitar_proyectos.gerente_solicita_group"
+                web_icon="solicitar_proyectos,static/description/icon.png"
+	            />
+                -->
+
+                <menuitem name="Ingresar Proyectos" id="menu_proyec_solicitar_act" 
+            	      parent="solicitar_proyectos.menu_solcita_proyecto_root"
+                      groups="solicitar_proyectos.supervisor_solicita_group,solicitar_proyectos.gerente_solicita_group"
+                      action="solicita_123"
+                      sequence="1"/>
+                
+
+                <menuitem
+                    id="solicita_proyecto_config_configu"
+                    name="Configuracion"
+                    parent="solicitar_proyectos.menu_solcita_proyecto_root"
+                    sequence="25" 
+                    groups="solicitar_proyectos.gerente_solicita_group"/>
+
+                <menuitem
+                    id="menu_proyectos_lead_categ" name="Etiquetas"
+                    parent="solicitar_proyectos.solicita_proyecto_config_configu"
+                    groups="solicitar_proyectos.gerente_solicita_group"
+                    action="proyectos_lead_tag_action"
+                    sequence="1"/>   
+
+
+
+    </data>
+</odoo>

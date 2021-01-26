@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+menu_projectos_root,access.model_solicitar_proyectos,model_model_solicitar_proyectos,supervisor_solicita_group,1,1,1,1
+menu_projectos_root1,access.model_solicitar_proyectos,model_model_solicitar_proyectos,gerente_solicita_group,1,1,1,1
+menu_projectos_root2,access.model_model_solicitar_proyectos_tareas,model_model_solicitar_tareas,supervisor_solicita_group,1,1,1,1
+menu_projectos_root3,access.model_model_solicitar_proyectos_tareas,model_model_solicitar_tareas,gerente_solicita_group,1,1,1,1
+menu_projectos_root4,access.model_project_project,model_project_project,gerente_solicita_group,1,1,1,1
+menu_projectos_root5,access.model_project_project,model_project_project,supervisor_solicita_group,1,1,1,1
+menu_projectos_root6,access.proyecto_lead_tag,model_proyecto_lead_tag,gerente_solicita_group,1,1,1,1
+menu_projectos_root7,access.proyecto_lead_tag,model_proyecto_lead_tag,supervisor_solicita_group,1,1,1,1
+
+
+
