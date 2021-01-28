@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+    <record model="ir.ui.view" id="crm_flujo_nuevo_operaciones_aba_operaciones_inherit_form_view">
+        <field name="name">crm_flujo_nuevo_operaciones.aba.form.view_seguimiento_plataforma</field>
+        <field name="model">crm_flujo_nuevo_operaciones</field>
+        <field name="inherit_id" ref="crm_funel_venta_guip.data_crm_form"/>
+        <field name="arch" type="xml">
+            
+
+            <header>
+
+                     <button name="enviar_compras_aba" string="Orden de compra" 
+                             type="object" 
+                            groups="crm_funel_venta_guip.supervisor_nivel2_flujo_operaciones_group, crm_funel_venta_guip.gerente_flujo_operaciones_group"
+                            attrs="{'invisible': ['|', ('active','=',False), ('probability', '!=', 50)]}"
+                            class="oe_highlight" />
+
+                    <button name="envio_aprobacion" string="Enviar Aprobacion" 
+                            type="object" 
+                            attrs="{'invisible': ['|', ('active','=',False), ('probability', '!=', 40)]}"
+                            class="oe_highlight" />
+                    
+                     <button name="contrato_recurrente" string="Finalizar" 
+                            groups="crm_funel_venta_guip.supervisor_nivel2_flujo_operaciones_group, crm_funel_venta_guip.gerente_flujo_operaciones_group"
+                            type="object" 
+                            attrs="{'invisible': ['|', ('active','=',False), ('probability', '!=', 100)]}"
+                            class="oe_highlight" />
+
+                              
+            </header>
+
+
+             <div class="oe_button_box" position="inside">
+                
+                <button class="oe_stat_button" name="document_view_compras" type="object" icon="fa-spinner">
+                        <field string="Compras" name="document_count_compras" widget="statinfo"/>
+                </button>
+               
+            </div>
+
+            
+
+            <field name="codigo_dispositvio" position="after">
+                    <field name="elegir_proveedor_id" />
+            </field>
+
+            <field name="crm_id" position="after">
+                <field name="sale_id"  readonly="1"/>
+            </field>
+            
+
+            <field name="probability" position="after">
+                <field name="enviado_apro"  readonly="1"/>
+                <field name="enviado_compra"  readonly="1"/>
+                <field name="instalado_aba"  readonly="1"/>
+            </field>
+
+
+            <notebook>
+                    <page string="ABA">
+
+                        <group colspan="4">
+                              <field name="name_agente_atlantida" />
+                              <field name="codigo" />
+                              <field name="terminal" />
+                              <field name="tipo_terminal" />
+                        </group>
+
+                        <group colspan="4">
+                              <field name="name_contacto" />
+                              <field name="rtn" />
+                              <field name="usuario" />
+                              <field name="recibe_gestion" />
+                        </group>
+
+                        <group colspan="4">
+                              <field name="tipo_chip_selec" />
+                              <field name="token" />
+                        </group>
+
+                        <group colspan="8">
+                            <field name="comentarios" />
+                        </group>
+
+                    </page>   
+
+                    
+                 </notebook>
+        
+        </field>
+    </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+menu_hr_attendance_root200,access.creacion_usuarios_aba,model_creacion_usuarios_aba,sales_team.group_sale_manager,1,1,1,1
+menu_hr_attendance_root201,access.creacion_usuarios_aba,model_creacion_usuarios_aba,sales_team.group_sale_salesman,1,1,1,1
+menu_hr_attendance_root204,access.motivo_perdida_operaciones,model_motivo_perdida_operaciones,sales_team.group_sale_salesman,1,0,0,0
+
+menu_hr_attendance_root205,access.motivo_perdida_operaciones,model_motivo_perdida_operaciones,crm_funel_venta_guip.supervisor_flujo_operaciones_group,1,1,1,1
+menu_hr_attendance_root206,access.motivo_perdida_operaciones,model_motivo_perdida_operaciones,crm_funel_venta_guip.gerente_flujo_operaciones_group,1,1,1,1
+
+

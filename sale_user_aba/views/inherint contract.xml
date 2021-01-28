@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="contract_contract_aba_inherit_form_view">
+            <field name="name">contract.contract.form.view_inherint</field>
+            <field name="model">contract.contract</field>
+            <field name="inherit_id" ref="contract.contract_contract_form_view"/>
+            <field name="arch" type="xml">
+
+                <field name="recurring_next_date" position="after">
+                    <field name="contract_aba" />
+                </field>
+
+            </field>
+        </record>
+            
+    </data>
+</odoo>
